@@ -1,0 +1,39 @@
+---
+description: >
+
+  User Management Example Commissioning File
+  Cybus Learn - User Management Basics
+  https://learn.cybus.io/lessons/user-management-basics/
+
+metadata:
+
+  name: User Management Example
+  version: 0.0.1
+  icon: https://www.cybus.io/wp-content/uploads/2019/03/Cybus-logo-Claim-lang.svg
+  provider: cybus
+  homepage: https://www.cybus.io
+
+parameters:
+
+  userPassword:
+    type: string
+    description: Password for user
+
+resources:
+
+  UserManagement:
+    type: Cybus::Role
+    properties:
+      permissions:
+        - resource: users/#
+          operation: readWrite
+          context: mqtt
+        - resource: /api/users/#
+          operation: readWrite
+          context: http
+
+  user:
+    type: Cybus::User
+    properties:
+      password: !ref userPassword
+      roles: ['UserManagement']
