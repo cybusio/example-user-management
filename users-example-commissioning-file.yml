@@ -36,4 +36,5 @@ resources:
     type: Cybus::User
     properties:
       password: !ref userPassword
-      roles: ['UserManagement']
+      roles:
+        - !ref UserManagement
